@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3305/stylemate
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
+#spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/stylemate
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        # show_sql: true
+        format_sql: true
+        # default_batch_fetch_size: 100
+        # open-in-view: false
+
+logging.level:
+  org.hibernate.SQL: debug
+#  org.hibernate.type: trace
