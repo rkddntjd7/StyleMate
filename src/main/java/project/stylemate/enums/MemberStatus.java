@@ -1,5 +1,5 @@
 package project.stylemate.enums;
 
-public enum Status {
+public enum MemberStatus {
     WITHDRAWAL, DORMANCY
 }

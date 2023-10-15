@@ -8,11 +8,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
-@Setter
 public class BookMark extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
