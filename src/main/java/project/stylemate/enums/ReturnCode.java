@@ -6,11 +6,20 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ReturnCode {
-    // 1400번대는 style, 클라이언트 에러
-    // 1500 style의 서버 에러
+    //1400 - Member 클라이언트 에러
+    //1500 - Member 서버 에러
+    //2400 - Style 클라이언트 에러
+    //2500 - Style 서버 에러
+    //3400 - Comment 클라이언트 에러
+    //3500 - Comment 서버 에러
     SUCCESS("0000", "요청에 성공하였습니다."),
 
     WRONG_PARAMETER("1000", "잘못된 파라미터입니다."),
+    WRONG_HTTP_METHOD("1001", "잘못된 요청메서드입니다."),
+    CONSTRAINT_VIOLATION("1002","제약조건이 맞지 않습니다."),
+    VALIDATION_ERROR("1004", "검증 과정에서 문제가 발생하였습니다."),
+    MISSING_PARAMETER("1003", "필수 요청 매개변수가 누락되었습니다."),
+
 
     USERNAME_ALREADY_EXISTS("1400", "이미 사용중인 아이디입니다."),
     INVALID_GENDER("1401", "잘못된 성별 값입니다."),

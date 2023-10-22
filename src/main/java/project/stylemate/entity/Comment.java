@@ -36,13 +36,10 @@ public class Comment extends BaseEntity{
         this.content = content;
     }
 
-    public CommentsResponse toDto() {
-        return CommentsResponse.builder()
-                .memberId(this.member.getId())
-                .styleId(this.style.getId())
-                .content(this.content)
-                .build();
+    public void updateContent(String content) {
+        this.content = content;
     }
+
 
 
 }

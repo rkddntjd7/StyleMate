@@ -55,49 +55,22 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    @Transactional
-    public void saveWithParams(SaveCommentParam param) {
-        Style style = styleRepository.findById(param.getStyleId())
-                .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
-
-        Member member = memberRepository.findById(param.getMemberId())
-                .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
-
-        Comment comment = param.toEntity(style, member);
-        commentRepository.save(comment);
-    }
 
     @Transactional
-    public void update(Long commentId, Long styleId, Long memberId, String content) {
-        Comment findComment = commentRepository.findById(commentId)
+    public void update(Long commentId, String content) {
+        Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.COMMENT_NOT_FOUND));
 
-        Style style = styleRepository.findById(styleId)
-                .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
+        comment.updateContent(content);
 
-
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
-
-        Comment comment = Comment.builder()
-                .id(findComment.getId())
-                .style(style)
-                .member(member)
-                .content(content)
-                .build();
-
-        commentRepository.save(comment);
     }
 
     @Transactional
-    public void delete(Long commentsId, Long styleId) {
-        styleRepository.findById(styleId)
-                .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
+    public void delete(Long commentId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.COMMENT_NOT_FOUND));
 
-        commentRepository.findById(commentsId)
-                        .orElseThrow(() -> new SmLogicException(ReturnCode.COMMENT_NOT_FOUND));
-
-        commentRepository.deleteById(commentsId);
+        commentRepository.delete(comment);
     }
 
 
