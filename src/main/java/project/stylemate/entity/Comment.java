@@ -1,18 +1,18 @@
 package project.stylemate.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import project.stylemate.dto.CommentsResponse;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
-@Setter
+@NoArgsConstructor
 public class Comment extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,5 +27,19 @@ public class Comment extends BaseEntity{
 
     @NotNull
     private String content;
+
+    @Builder
+    public Comment(Long id, Member member, Style style, String content) {
+        this.id = id;
+        this.member = member;
+        this.style = style;
+        this.content = content;
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+
 
 }

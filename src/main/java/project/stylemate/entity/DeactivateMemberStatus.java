@@ -1,19 +1,17 @@
 package project.stylemate.entity;
 
 import lombok.Getter;
-import lombok.Setter;
-import project.stylemate.enums.Status;
+import project.stylemate.enums.MemberStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
-@Setter
 public class DeactivateMemberStatus extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -24,7 +22,7 @@ public class DeactivateMemberStatus extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     @NotNull
-    private Status status;
+    private MemberStatus status;
 
 
 }

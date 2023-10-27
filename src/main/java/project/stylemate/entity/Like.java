@@ -8,12 +8,11 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "likes")
 public class Like extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
