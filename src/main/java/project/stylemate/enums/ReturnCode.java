@@ -19,6 +19,7 @@ public enum ReturnCode {
     CONSTRAINT_VIOLATION("1002","제약조건이 맞지 않습니다."),
     VALIDATION_ERROR("1004", "검증 과정에서 문제가 발생하였습니다."),
     MISSING_PARAMETER("1003", "필수 요청 매개변수가 누락되었습니다."),
+    SQL_INTEGRITY_CONSTRAIN_VIOLATION("1005", "외래키 제약 조건을 위반하였습니다." ),
 
 
     USERNAME_ALREADY_EXISTS("1400", "이미 사용중인 아이디입니다."),

@@ -11,6 +11,7 @@ import project.stylemate.dto.common.ApiResponse;
 import project.stylemate.enums.ReturnCode;
 
 import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -48,5 +49,9 @@ public class GlobalExceptionHandler {
         return ApiResponse.of(ReturnCode.MISSING_PARAMETER);
     }
 
+    @ExceptionHandler(value = {SQLIntegrityConstraintViolationException.class})
+    public ApiResponse<?> handleSQLIntegrityConstraintViolationException(Exception e) {
+        return ApiResponse.of(ReturnCode.SQL_INTEGRITY_CONSTRAIN_VIOLATION);
+    }
 
 }
