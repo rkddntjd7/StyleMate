@@ -80,4 +80,19 @@ public class Member extends BaseEntity{
         this.point = point;
         this.isActive = isActive;
     }
+
+    public void updateMember(String nickname, String username, String password, String email, String name, LocalDate birthDate, String phoneNumber, Gender gender, String styleCategory, String userImageUrl, Integer point, boolean isActive) {
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.styleCategory = styleCategory;
+        this.userImageUrl = userImageUrl;
+        this.point = point;
+        this.isActive = isActive;
+    }
 }
