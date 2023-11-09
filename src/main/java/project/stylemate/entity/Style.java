@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Style extends BaseEntity{
+public class Style extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,15 +44,15 @@ public class Style extends BaseEntity{
     private String content;
 
     @NotNull
-    private Integer viewCount;
+    private Long styleRank;
 
     @NotNull
-    private Long styleRank;
+    private long viewCount = 0;
 
     private LocalDateTime deleteDateTime;
 
     @Builder
-    public Style(Long id, Member member, String styleImages, Gender gender, Integer minHeight, Integer maxHeight, String styleCategory, String content, Integer viewCount, Long styleRank, LocalDateTime deleteDateTime) {
+    public Style(Long id, Member member, String styleImages, Gender gender, Integer minHeight, Integer maxHeight, String styleCategory, String content, Long styleRank, LocalDateTime deleteDateTime) {
         this.id = id;
         this.member = member;
         this.styleImages = styleImages;
@@ -61,23 +61,27 @@ public class Style extends BaseEntity{
         this.maxHeight = maxHeight;
         this.styleCategory = styleCategory;
         this.content = content;
-        this.viewCount = viewCount;
         this.styleRank = styleRank;
         this.deleteDateTime = deleteDateTime;
     }
 
-    public void updateStyle(String styleImages, Gender gender, Integer minHeight, Integer maxHeight, String styleCategory, String content, Integer viewCount, Long styleRank) {
+    public void update(String styleImages,
+                            Gender gender,
+                            Integer minHeight,
+                            Integer maxHeight,
+                            String styleCategory,
+                            String content,
+                            Long styleRank) {
         this.styleImages = styleImages;
         this.gender = gender;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
         this.styleCategory = styleCategory;
         this.content = content;
-        this.viewCount = viewCount;
         this.styleRank = styleRank;
     }
 
-    public void deleteStyle(LocalDateTime deleteDateTime) {
+    public void delete(LocalDateTime deleteDateTime) {
         this.deleteDateTime = deleteDateTime;
     }
 

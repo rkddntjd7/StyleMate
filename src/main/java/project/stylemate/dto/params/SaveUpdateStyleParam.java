@@ -8,7 +8,7 @@ import project.stylemate.enums.Gender;
 
 @Getter
 @Builder
-public class StyleParam {
+public class SaveUpdateStyleParam {
 
     private Long memberId;
     private String styleImages;
@@ -17,7 +17,6 @@ public class StyleParam {
     private Integer maxHeight;
     private String styleCategory;
     private String content;
-    private Integer viewCount;
     private Long styleRank;
 
     public Style toEntity(Member member) {
@@ -29,7 +28,6 @@ public class StyleParam {
                 .maxHeight(maxHeight)
                 .styleCategory(styleCategory)
                 .content(content)
-                .viewCount(viewCount)
                 .styleRank(styleRank)
                 .build();
     }

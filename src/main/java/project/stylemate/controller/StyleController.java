@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import project.stylemate.dto.style.StyleSearchCondition;
 import project.stylemate.dto.common.ApiResponse;
 import project.stylemate.dto.common.SmPage;
-import project.stylemate.dto.params.StyleParam;
+import project.stylemate.dto.params.SaveUpdateStyleParam;
 import project.stylemate.dto.style.SaveStyleRequest;
 import project.stylemate.dto.style.StyleResponse;
 import project.stylemate.dto.style.UpdateStyleRequest;
@@ -15,6 +15,8 @@ import project.stylemate.entity.Style;
 import project.stylemate.enums.ReturnCode;
 import project.stylemate.service.StyleService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
@@ -41,29 +43,27 @@ public class StyleController {
     public ApiResponse<?> getStyleById(@PathVariable Long styleId, StyleResponse styleResponse) {
         Style style = styleService.getStyleById(styleId);
 
-        StyleResponse styleDto = styleResponse.of(style);
-
-        return ApiResponse.of(styleDto);
+        return ApiResponse.of(styleResponse.of(style));
     }
 
     //API 문서: https://www.notion.so/ac3f277d8db7401f936fee4f1d26b92d?pvs=4
     @PostMapping("/api/v1/styles")
-    public ApiResponse<?> save(@RequestBody @Valid SaveStyleRequest saveStyleRequest) {
+    public ApiResponse<?> save(@RequestBody @Valid SaveStyleRequest request) {
         // TODO: member 작업 이후 argument resolver로 받기
         Long memberId = 1L;
 
-        StyleParam param = saveStyleRequest.toParam(memberId);
+        SaveUpdateStyleParam param = request.toParam(memberId);
         styleService.save(param);
 
         return ApiResponse.of(ReturnCode.SUCCESS);
     }
 
     @PatchMapping("/api/v1/styles/{styleId}")
-    public ApiResponse<?> update(@PathVariable Long styleId, @RequestBody @Valid UpdateStyleRequest updateStyleRequest) {
+    public ApiResponse<?> update(@PathVariable Long styleId, @RequestBody @Valid UpdateStyleRequest request) {
         // TODO: member 작업 이후 argument resolver로 받기
         Long memberId = 1L;
 
-        StyleParam param = updateStyleRequest.toParam(memberId);
+        SaveUpdateStyleParam param = request.toParam(memberId);
         styleService.update(styleId, param);
 
         return ApiResponse.of(ReturnCode.SUCCESS);
