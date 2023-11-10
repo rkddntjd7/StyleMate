@@ -9,6 +9,8 @@ import project.stylemate.enums.ReturnCode;
 import project.stylemate.exception.SmLogicException;
 import project.stylemate.repository.MemberRepository;
 
+import java.time.LocalDateTime;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -16,8 +18,8 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Member getMemberById(Long memberId) {
-        return memberRepository.findById(memberId)
+    public Member getMemberById(Long userId) {
+        return memberRepository.findById(userId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
     }
 
@@ -29,10 +31,11 @@ public class MemberService {
     }
 
     @Transactional
-    public void update(MemberParam param) {
-        Member member = param.toEntity();
+    public void update(Long userId, MemberParam param) {
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
 
-        member.updateMember(
+        member.update(
                 param.getNickname(),
                 param.getUsername(),
                 param.getPassword(),
@@ -42,11 +45,16 @@ public class MemberService {
                 param.getPhoneNumber(),
                 param.getGender(),
                 param.getStyleCategory(),
-                param.getUserImageUrl(),
-                param.getPoint(),
-                param.isActive()
+                param.getUserImageUrl()
         );
 
+    }
 
+    @Transactional
+    public void delete(Long userId) {
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
+
+        member.delete(LocalDateTime.now());
     }
 }

@@ -1,31 +1,44 @@
-package project.stylemate.dto.params;
+package project.stylemate.dto.member;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import project.stylemate.entity.Member;
+import lombok.NoArgsConstructor;
+import project.stylemate.dto.params.MemberParam;
 import project.stylemate.enums.Gender;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
 @Builder
-public class MemberParam {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SaveMemberRequest {
 
+    @NotNull
     private String nickname;
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String email;
+    @NotNull
     private String name;
+    @NotNull
     private LocalDate birthDate;
+    @NotNull
     private String phoneNumber;
+    @NotNull
     private Gender gender;
+    @NotNull
     private String styleCategory;
+    @NotNull
     private String userImageUrl;
 
-    public Member toEntity() {
-        return Member.builder()
+    public MemberParam toParam() {
+        return MemberParam.builder()
                 .nickname(nickname)
                 .username(username)
                 .password(password)

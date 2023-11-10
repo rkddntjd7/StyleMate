@@ -10,5 +10,4 @@ import project.stylemate.entity.Style;
 import javax.persistence.EntityManager;
 
 public interface StyleRepository extends JpaRepository<Style, Long>, StyleRepositoryCustom {
-
 }
