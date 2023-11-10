@@ -14,19 +14,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateStyleRequest {
-    @NotNull
+
     private String styleImages;
-    @NotNull
     private Gender gender;
-    @NotNull
     private Integer minHeight;
-    @NotNull
     private Integer maxHeight;
-    @NotNull
     private String styleCategory;
-    @NotNull
     private String content;
-    @NotNull
     private Long styleRank;
 
     public SaveUpdateStyleParam toParam(Long memberId) {

@@ -78,8 +78,8 @@ public class StyleController {
     }
 
     @PatchMapping("/api/v1/styles/{styleId}/increase-views")
-    public ApiResponse<?> increaseViews(@PathVariable Long styleId) {
-        styleService.increaseViews(styleId);
+    public ApiResponse<?> increaseViews(@PathVariable Long styleId, HttpServletRequest request, HttpServletResponse response) {
+        styleService.increaseViews(styleId, request, response);
 
         return ApiResponse.of(ReturnCode.SUCCESS);
     }

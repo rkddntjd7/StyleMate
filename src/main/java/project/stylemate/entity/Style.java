@@ -65,20 +65,37 @@ public class Style extends BaseEntity {
         this.deleteDateTime = deleteDateTime;
     }
 
-    public void update(String styleImages,
-                            Gender gender,
-                            Integer minHeight,
-                            Integer maxHeight,
-                            String styleCategory,
-                            String content,
-                            Long styleRank) {
-        this.styleImages = styleImages;
-        this.gender = gender;
-        this.minHeight = minHeight;
-        this.maxHeight = maxHeight;
-        this.styleCategory = styleCategory;
-        this.content = content;
-        this.styleRank = styleRank;
+    public void update(
+            String styleImages,
+            Gender gender,
+            Integer minHeight,
+            Integer maxHeight,
+            String styleCategory,
+            String content,
+            Long styleRank
+    ) {
+        if (styleImages != null && !styleImages.equals(this.styleImages)) {
+            this.styleImages = styleImages;
+        }
+        if (gender != null && !gender.equals(this.gender)) {
+            this.gender = gender;
+        }
+        if (minHeight != null && !minHeight.equals(this.minHeight)) {
+            this.minHeight = minHeight;
+        }
+        if (maxHeight != null && !maxHeight.equals(this.maxHeight)) {
+            this.maxHeight = maxHeight;
+        }
+        if (styleCategory != null && !styleCategory.equals(this.styleCategory)) {
+            this.styleCategory = styleCategory;
+        }
+        if (content != null && !content.equals(this.content)) {
+            this.content = content;
+        }
+        if (styleRank != null && !styleRank.equals(this.styleRank)) {
+            this.styleRank = styleRank;
+        }
+
     }
 
     public void delete(LocalDateTime deleteDateTime) {

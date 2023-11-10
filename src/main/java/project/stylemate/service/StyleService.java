@@ -1,6 +1,7 @@
 package project.stylemate.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class StyleService {
 
     private final StyleRepository styleRepository;
@@ -77,43 +80,33 @@ public class StyleService {
     }
 
     @Transactional
-    public void increaseViews(Long styleId) {
+    public void increaseViews(Long styleId, HttpServletRequest request, HttpServletResponse response) {
         Style style = styleRepository.findById(styleId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
 
-        style.increaseViews((int) style.getViewCount());
+
+        if (!hasViewed(styleId, request)) {
+            style.increaseViews((int) style.getViewCount());
+            setViewedCookie(styleId, response);
+        } else {
+            log.info("이미 조회한 게시물입니다.");
+        }
     }
 
-//    @Transactional
-//    public void increaseViews(Long styleId, HttpServletRequest request, HttpServletResponse response) {
-//        Style style = styleRepository.findById(styleId)
-//                .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
-//
-//        Cookie oldCookie = null;
-//
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("styleView")) {
-//                    oldCookie = cookie;
-//                }
-//            }
-//        }
-//
-//        if (oldCookie != null) {
-//            if (!oldCookie.getValue().contains("[" + styleId.toString() + "]")) {
-//                style.increaseViews((int) style.getViewCount());
-//                oldCookie.setValue(oldCookie.getValue() + "_[" + styleId + "]");
-//                oldCookie.setPath("/");
-//                oldCookie.setMaxAge(60 * 60 * 24);
-//                response.addCookie(oldCookie);
-//            }
-//        } else {
-//            style.increaseViews((int) style.getViewCount());
-//            Cookie newCookie = new Cookie("styleView", "[" + styleId + "]");
-//            newCookie.setPath("/");
-//            oldCookie.setMaxAge(60 * 60 * 24);
-//            response.addCookie(newCookie);
-//        }
-//    }
+    private boolean hasViewed(Long styleId, HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            return Arrays.stream(cookies)
+                    .anyMatch(cookie -> cookie.getName().equals("viewed_style_" + styleId));
+        }
+        return false;
+    }
+
+    private void setViewedCookie(Long styleId, HttpServletResponse response) {
+        Cookie viewedCookie = new Cookie("viewed_style_" + styleId, "true");
+        viewedCookie.setMaxAge(24 * 60 * 60);
+        viewedCookie.setPath("/");
+        response.addCookie(viewedCookie);
+    }
+
 }
