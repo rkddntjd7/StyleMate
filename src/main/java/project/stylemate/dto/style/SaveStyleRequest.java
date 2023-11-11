@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.stylemate.dto.params.SaveUpdateStyleParam;
+import project.stylemate.dto.params.UpsertStyleParam;
 import project.stylemate.enums.Gender;
 
 import javax.validation.constraints.NotNull;
@@ -31,8 +31,8 @@ public class SaveStyleRequest {
     @NotNull
     private Long styleRank;
 
-    public SaveUpdateStyleParam toParam(Long memberId) {
-        return SaveUpdateStyleParam.builder()
+    public UpsertStyleParam toParam(Long memberId) {
+        return UpsertStyleParam.builder()
                 .memberId(memberId)
                 .styleImages(styleImages)
                 .gender(gender)

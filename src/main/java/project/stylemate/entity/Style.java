@@ -52,7 +52,18 @@ public class Style extends BaseEntity {
     private LocalDateTime deleteDateTime;
 
     @Builder
-    public Style(Long id, Member member, String styleImages, Gender gender, Integer minHeight, Integer maxHeight, String styleCategory, String content, Long styleRank, LocalDateTime deleteDateTime) {
+    public Style(
+            Long id,
+            Member member,
+            String styleImages,
+            Gender gender,
+            Integer minHeight,
+            Integer maxHeight,
+            String styleCategory,
+            String content,
+            Long styleRank,
+            LocalDateTime deleteDateTime
+    ) {
         this.id = id;
         this.member = member;
         this.styleImages = styleImages;

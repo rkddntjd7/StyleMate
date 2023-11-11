@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.stylemate.dto.style.StyleSearchCondition;
-import project.stylemate.dto.params.SaveUpdateStyleParam;
+import project.stylemate.dto.params.UpsertStyleParam;
 import project.stylemate.entity.Member;
 import project.stylemate.entity.Style;
 import project.stylemate.enums.ReturnCode;
@@ -19,7 +19,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
 @Service
@@ -44,7 +43,7 @@ public class StyleService {
     }
 
     @Transactional
-    public void save(SaveUpdateStyleParam param) {
+    public void save(UpsertStyleParam param) {
         Member member = memberRepository.findById(param.getMemberId())
                 .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
 
@@ -54,7 +53,7 @@ public class StyleService {
     }
 
     @Transactional
-    public void update(Long styleId, SaveUpdateStyleParam param) {
+    public void update(Long styleId, UpsertStyleParam param) {
         Style style = styleRepository.findById(styleId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
 
@@ -81,6 +80,7 @@ public class StyleService {
 
     @Transactional
     public void increaseViews(Long styleId, HttpServletRequest request, HttpServletResponse response) {
+        //TODO: redis 사용하여 어뷰징 방지
         Style style = styleRepository.findById(styleId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
 

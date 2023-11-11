@@ -18,11 +18,4 @@ public class SaveCommentRequest {
     @NotNull
     private String content;
 
-    public SaveCommentParam convert(Long styleId, Long memberId) {
-        return SaveCommentParam.builder()
-                .content(content)
-                .styleId(styleId)
-                .memberId(memberId)
-                .build();
-    }
 }

@@ -8,7 +8,7 @@ import project.stylemate.enums.Gender;
 
 @Getter
 @Builder
-public class SaveUpdateStyleParam {
+public class UpsertStyleParam {
 
     private Long memberId;
     private String styleImages;
