@@ -2,6 +2,7 @@ package project.stylemate.dto.style;
 
 import lombok.Builder;
 import lombok.Getter;
+import project.stylemate.entity.Like;
 import project.stylemate.entity.Style;
 import project.stylemate.enums.Gender;
 
@@ -20,7 +21,10 @@ public class StyleResponse {
     private Integer viewCount;
     private Long styleRank;
 
-    public static StyleResponse of(Style style) {
+    private Long likeCount;
+
+
+    public static StyleResponse of(Style style, Long likeCount) {
         return StyleResponse.builder()
                 .memberId(style.getMember().getId())
                 .nickname(style.getMember().getNickname())
@@ -32,6 +36,7 @@ public class StyleResponse {
                 .content(style.getContent())
                 .viewCount((int) style.getViewCount())
                 .styleRank(style.getStyleRank())
+                .likeCount(likeCount)
                 .build();
     }
 

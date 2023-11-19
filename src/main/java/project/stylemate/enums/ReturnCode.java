@@ -8,10 +8,15 @@ import lombok.Getter;
 public enum ReturnCode {
     //1400 - Member 클라이언트 에러
     //1500 - Member 서버 에러
+
     //2400 - Style 클라이언트 에러
     //2500 - Style 서버 에러
+
     //3400 - Comment 클라이언트 에러
     //3500 - Comment 서버 에러
+
+    //4400 - Like 클라이언트 에러
+    //4500 - Like 서버 에러
     SUCCESS("0000", "요청에 성공하였습니다."),
 
     WRONG_PARAMETER("1000", "잘못된 파라미터입니다."),
@@ -33,7 +38,9 @@ public enum ReturnCode {
     STYLE_NOT_FOUND("2501", "해당 스타일을 찾을 수 없습니다."),
 
     COMMENT_NOT_FOUND("3501", "해당 댓글을 찾을 수 없습니다."),
-    COMMENT_NOT_IN_STYLE("3502","해당 댓글이 지정된 스타일에서 찾을 수 없습니다.");
+    COMMENT_NOT_IN_STYLE("3502","해당 댓글이 지정된 스타일에서 찾을 수 없습니다."),
+
+    LIKE_NOT_FOUND("4501", "해당 좋아요를 찾을 수 없습니다.");
 
 
     private final String returnCode;

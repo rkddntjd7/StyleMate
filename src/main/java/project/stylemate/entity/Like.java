@@ -1,7 +1,6 @@
 package project.stylemate.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +8,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Table(name = "likes")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Like extends BaseEntity{
 
     @Id

@@ -10,6 +10,7 @@ import project.stylemate.dto.common.SmPage;
 import project.stylemate.dto.params.UpsertStyleParam;
 import project.stylemate.entity.Style;
 import project.stylemate.enums.ReturnCode;
+import project.stylemate.service.LikeService;
 import project.stylemate.service.StyleService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 public class StyleController {
 
     private final StyleService styleService;
+    private final LikeService likeService;
 
     //API 문서: https://www.notion.so/d6b383b3ef7a4426b1ec5a95f61563f9?pvs=4
     @GetMapping("/api/v1/styles")
@@ -30,7 +32,10 @@ public class StyleController {
 
         Page<Style> stylePage = styleService.getAllStyles(memberId, request.toCond(), pageable);
 
-        Page<StyleResponse> styleDtoPage = stylePage.map(StyleResponse::of);
+        Page<StyleResponse> styleDtoPage = stylePage.map(style -> {
+            Long likeCount = likeService.getLikeCountByStyleId(style.getId());
+            return StyleResponse.of(style, likeCount);
+        });
 
         return ApiResponse.of(SmPage.of(styleDtoPage));
     }
@@ -39,8 +44,9 @@ public class StyleController {
     @GetMapping("/api/v1/styles/{styleId}")
     public ApiResponse<?> getStyleById(@PathVariable Long styleId) {
         Style style = styleService.getStyleById(styleId);
+        Long likeCount = likeService.getLikeCountByStyleId(styleId);
 
-        return ApiResponse.of(StyleResponse.of(style));
+        return ApiResponse.of(StyleResponse.of(style, likeCount));
     }
 
     //API 문서: https://www.notion.so/ac3f277d8db7401f936fee4f1d26b92d?pvs=4
