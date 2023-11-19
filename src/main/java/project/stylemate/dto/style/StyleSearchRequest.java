@@ -1,6 +1,7 @@
 package project.stylemate.dto.style;
 
 import lombok.Getter;
+import project.stylemate.entity.Like;
 import project.stylemate.enums.Gender;
 
 @Getter
