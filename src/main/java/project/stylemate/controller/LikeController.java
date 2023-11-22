@@ -25,7 +25,7 @@ public class LikeController {
         return ApiResponse.of(ReturnCode.SUCCESS);
     }
 
-    @DeleteMapping("/api/v1/styles/{styleId}/{likeId}")
+    @DeleteMapping("/api/v1/styles/{styleId}/favorites/{likeId}")
     public ApiResponse<?> delete(@PathVariable Long styleId,
                                  @PathVariable Long likeId) {
         likeService.delete(likeId);
