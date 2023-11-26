@@ -50,7 +50,7 @@ public class QStyle extends EntityPathBase<Style> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateDateTime = _super.updateDateTime;
 
-    public final NumberPath<Integer> viewCount = createNumber("viewCount", Integer.class);
+    public final NumberPath<Long> viewCount = createNumber("viewCount", Long.class);
 
     public QStyle(String variable) {
         this(Style.class, forVariable(variable), INITS);

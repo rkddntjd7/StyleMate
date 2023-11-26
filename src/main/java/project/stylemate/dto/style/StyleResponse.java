@@ -30,7 +30,7 @@ public class StyleResponse {
                 .maxHeight(style.getMaxHeight())
                 .styleCategory(style.getStyleCategory())
                 .content(style.getContent())
-                .viewCount(style.getViewCount())
+                .viewCount((int) style.getViewCount())
                 .styleRank(style.getStyleRank())
                 .build();
     }

@@ -93,29 +93,6 @@
 //        verify(commentRepository, times(1)).save(any(Comment.class));
 //    }
 //
-//    @Test
-//    void 댓글_파라미터로_저장() {
-//        // given
-//        SaveCommentParam param = SaveCommentParam.builder()
-//                .memberId(1L)
-//                .styleId(1L)
-//                .content("test content")
-//                .build();
-//
-//        Style style = new Style();
-//        Member member = new Member();
-//
-//        when(styleRepository.findById(param.getStyleId())).thenReturn(Optional.of(style));
-//        when(memberRepository.findById(param.getMemberId())).thenReturn(Optional.of(member));
-//
-//        // when
-//        commentService.saveWithParams(param);
-//
-//        // then
-//        verify(styleRepository, times(1)).findById(param.getStyleId());
-//        verify(memberRepository, times(1)).findById(param.getMemberId());
-//        verify(commentRepository, times(1)).save(any(Comment.class));
-//    }
 //
 //    @Test
 //    void 댓글수정() {
@@ -145,7 +122,7 @@
 //        when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
 //
 //        // when
-//        assertDoesNotThrow(() -> commentService.update(commentId, styleId, memberId, updatedContent));
+//        assertDoesNotThrow(() -> commentService.update(commentId, updatedContent));
 //
 //        // then
 //        verify(commentRepository, times(1)).findById(commentId);
@@ -176,7 +153,7 @@
 //        when(commentRepository.findById(commentId)).thenReturn(Optional.of(existingComment));
 //
 //        // when
-//        assertDoesNotThrow(() -> commentService.delete(commentId, styleId));
+//        assertDoesNotThrow(() -> commentService.delete(commentId));
 //
 //        // then
 //        verify(styleRepository, times(1)).findById(styleId);

@@ -49,9 +49,5 @@ public class GlobalExceptionHandler {
         return ApiResponse.of(ReturnCode.MISSING_PARAMETER);
     }
 
-    @ExceptionHandler(value = {SQLIntegrityConstraintViolationException.class})
-    public ApiResponse<?> handleSQLIntegrityConstraintViolationException(Exception e) {
-        return ApiResponse.of(ReturnCode.SQL_INTEGRITY_CONSTRAIN_VIOLATION);
-    }
 
 }

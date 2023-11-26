@@ -131,4 +131,5 @@ public class Member extends BaseEntity {
     public void delete(LocalDateTime deleteDateTime) {
         this.deleteDateTime = deleteDateTime;
     }
+
 }
