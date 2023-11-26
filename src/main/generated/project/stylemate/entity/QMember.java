@@ -26,6 +26,8 @@ public class QMember extends EntityPathBase<Member> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createDateTime = _super.createDateTime;
 
+    public final DateTimePath<java.time.LocalDateTime> deleteDateTime = createDateTime("deleteDateTime", java.time.LocalDateTime.class);
+
     public final StringPath email = createString("email");
 
     public final EnumPath<project.stylemate.enums.Gender> gender = createEnum("gender", project.stylemate.enums.Gender.class);
