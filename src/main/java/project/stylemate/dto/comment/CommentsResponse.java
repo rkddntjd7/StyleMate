@@ -1,4 +1,4 @@
-package project.stylemate.dto;
+package project.stylemate.dto.comment;
 
 import lombok.Builder;
 import lombok.Getter;

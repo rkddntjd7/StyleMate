@@ -1,7 +1,6 @@
 package project.stylemate.entity;
 
 import lombok.*;
-import project.stylemate.dto.CommentsResponse;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class Comment extends BaseEntity{
     @NotNull
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "style_id")
     @NotNull
     private Style style;

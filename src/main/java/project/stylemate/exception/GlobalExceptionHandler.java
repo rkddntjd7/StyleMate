@@ -11,6 +11,7 @@ import project.stylemate.dto.common.ApiResponse;
 import project.stylemate.enums.ReturnCode;
 
 import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

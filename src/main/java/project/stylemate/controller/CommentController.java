@@ -5,14 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import project.stylemate.dto.common.ApiResponse;
-import project.stylemate.dto.CommentsResponse;
-import project.stylemate.dto.SaveCommentRequest;
-import project.stylemate.dto.UpdateCommentRequest;
+import project.stylemate.dto.comment.CommentsResponse;
+import project.stylemate.dto.comment.SaveCommentRequest;
+import project.stylemate.dto.comment.UpdateCommentRequest;
 import project.stylemate.dto.common.SmPage;
-import project.stylemate.dto.params.SaveCommentParam;
 import project.stylemate.entity.Comment;
 import project.stylemate.enums.ReturnCode;
-import project.stylemate.repository.MemberRepository;
 import project.stylemate.service.CommentService;
 
 import javax.validation.Valid;

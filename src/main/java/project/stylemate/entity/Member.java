@@ -80,4 +80,5 @@ public class Member extends BaseEntity{
         this.point = point;
         this.isActive = isActive;
     }
+
 }
