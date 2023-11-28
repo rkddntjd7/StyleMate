@@ -47,10 +47,13 @@ class LikeServiceTest {
         when(likeRepository.findByMemberAndStyle(member, style)).thenReturn(Optional.empty());
 
         //when
-        boolean result = likeService.addLike(member.getId(), style.getId());
+        likeService.addLike(member.getId(), style.getId());
 
         //then
-        assertTrue(result);
+        verify(memberRepository, times(1)).findById(member.getId());
+        verify(styleRepository, times(1)).findById(style.getId());
+        verify(likeRepository, times(1)).findByMemberAndStyle(member, style);
+        verify(likeRepository, times(1)).save(any(Like.class));
     }
 
     @Test
@@ -65,10 +68,13 @@ class LikeServiceTest {
         when(likeRepository.findByMemberAndStyle(member, style)).thenReturn(Optional.of(like));
 
         //when
-        boolean result = likeService.addLike(member.getId(), style.getId());
+        likeService.addLike(member.getId(), style.getId());
 
         //then
-        assertFalse(result);
+        verify(memberRepository, times(1)).findById(member.getId());
+        verify(styleRepository, times(1)).findById(style.getId());
+        verify(likeRepository, times(1)).findByMemberAndStyle(member, style);
+        verify(likeRepository, times(0)).save(like);
     }
 
     @Test

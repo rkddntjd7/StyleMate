@@ -32,10 +32,7 @@ public class StyleController {
 
         Page<Style> stylePage = styleService.getAllStyles(memberId, request.toCond(), pageable);
 
-        Page<StyleResponse> styleDtoPage = stylePage.map(style -> {
-            Long likeCount = likeService.getLikeCountByStyleId(style.getId());
-            return StyleResponse.of(style, likeCount);
-        });
+        Page<GetAllStylesResponse> styleDtoPage = stylePage.map(GetAllStylesResponse::of);
 
         return ApiResponse.of(SmPage.of(styleDtoPage));
     }
@@ -46,7 +43,7 @@ public class StyleController {
         Style style = styleService.getStyleById(styleId);
         Long likeCount = likeService.getLikeCountByStyleId(styleId);
 
-        return ApiResponse.of(StyleResponse.of(style, likeCount));
+        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount));
     }
 
     //API 문서: https://www.notion.so/ac3f277d8db7401f936fee4f1d26b92d?pvs=4

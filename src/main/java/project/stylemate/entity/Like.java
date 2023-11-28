@@ -27,4 +27,8 @@ public class Like extends BaseEntity{
     @NotNull
     private Member member;
 
+    @NotNull
+    private boolean liked = false;
+
+
 }

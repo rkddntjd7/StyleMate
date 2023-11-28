@@ -1,6 +1,7 @@
 package project.stylemate.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import project.stylemate.entity.Like;
 import project.stylemate.entity.Member;
 import project.stylemate.entity.Style;

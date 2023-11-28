@@ -1,7 +1,6 @@
 package project.stylemate.entity;
 
 import lombok.*;
-import project.stylemate.dto.style.StyleResponse;
 import project.stylemate.enums.Gender;
 
 import javax.persistence.*;

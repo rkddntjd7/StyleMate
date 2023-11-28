@@ -22,7 +22,7 @@ public class LikeService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public boolean addLike(Long memberId, Long styleId) {
+    public void addLike(Long memberId, Long styleId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
 
@@ -31,14 +31,13 @@ public class LikeService {
 
         if (isNotAlreadyLike(member, style)) {
             likeRepository.save(Like.builder()
-                                    .member(member)
-                                    .style(style)
-                                    .build()
+                    .member(member)
+                    .style(style)
+                    .liked(true)
+                    .build()
             );
-            return true;
         }
 
-        return false;
     }
 
     private boolean isNotAlreadyLike(Member member, Style style) {

@@ -15,7 +15,8 @@ public class LikeController {
 
     private final LikeService likeService;
 
-    @PostMapping("/api/v1/styles/{styleId}/favorites")
+    //API 문서: https://www.notion.so/43e7ec9848194eeaba674dfca2f20d83?pvs=4
+    @PostMapping("/api/v1/styles/{styleId}/likes")
     public ApiResponse<?> addLike(@PathVariable Long styleId) {
         // TODO: member 작업 이후 argument resolver로 받기
         Long memberId = 1L;
@@ -25,6 +26,7 @@ public class LikeController {
         return ApiResponse.of(ReturnCode.SUCCESS);
     }
 
+    //API 문서: https://www.notion.so/6639d07047474f02808f77b306b5382f?pvs=4
     @DeleteMapping("/api/v1/styles/{styleId}/{likeId}")
     public ApiResponse<?> delete(@PathVariable Long styleId,
                                  @PathVariable Long likeId) {
