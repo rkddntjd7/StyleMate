@@ -40,10 +40,13 @@ public class StyleController {
     //API 문서: https://www.notion.so/a45ae0d712e54294991d680d2d43d425?pvs=4
     @GetMapping("/api/v1/styles/{styleId}")
     public ApiResponse<?> getStyleById(@PathVariable Long styleId) {
+        // TODO: member 작업 이후 argument resolver로 받기
+        Long memberId = 1L;
         Style style = styleService.getStyleById(styleId);
         Long likeCount = likeService.getLikeCountByStyleId(styleId);
+        boolean liked = likeService.isLikedByMember(memberId, styleId);
 
-        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount));
+        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount, liked));
     }
 
     //API 문서: https://www.notion.so/ac3f277d8db7401f936fee4f1d26b92d?pvs=4

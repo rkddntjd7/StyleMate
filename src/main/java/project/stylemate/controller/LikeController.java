@@ -27,7 +27,7 @@ public class LikeController {
     }
 
     //API 문서: https://www.notion.so/6639d07047474f02808f77b306b5382f?pvs=4
-    @DeleteMapping("/api/v1/styles/{styleId}/{likeId}")
+    @DeleteMapping("/api/v1/styles/{styleId}/likes/{likeId}")
     public ApiResponse<?> delete(@PathVariable Long styleId,
                                  @PathVariable Long likeId) {
         likeService.delete(likeId);

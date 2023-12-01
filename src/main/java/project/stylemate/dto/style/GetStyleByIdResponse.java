@@ -22,8 +22,10 @@ public class GetStyleByIdResponse {
 
     private Long likeCount;
 
+    private boolean liked = false;
 
-    public static GetStyleByIdResponse of(Style style, Long likeCount) {
+
+    public static GetStyleByIdResponse of(Style style, Long likeCount, boolean liked) {
         return GetStyleByIdResponse.builder()
                 .memberId(style.getMember().getId())
                 .nickname(style.getMember().getNickname())
@@ -36,6 +38,7 @@ public class GetStyleByIdResponse {
                 .viewCount((int) style.getViewCount())
                 .styleRank(style.getStyleRank())
                 .likeCount(likeCount)
+                .liked(liked)
                 .build();
     }
 

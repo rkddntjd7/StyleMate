@@ -33,7 +33,6 @@ public class LikeService {
             likeRepository.save(Like.builder()
                     .member(member)
                     .style(style)
-                    .liked(true)
                     .build()
             );
         }
@@ -57,5 +56,16 @@ public class LikeService {
                 .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
 
         return likeRepository.countByStyleId(styleId);
+    }
+
+
+    public boolean isLikedByMember(Long memberId, Long styleId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
+
+        Style style = styleRepository.findById(styleId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
+
+        return likeRepository.findByMemberAndStyle(member, style).isPresent();
     }
 }

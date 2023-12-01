@@ -29,8 +29,6 @@ public class QLike extends EntityPathBase<Like> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final BooleanPath liked = createBoolean("liked");
-
     public final QMember member;
 
     public final QStyle style;
