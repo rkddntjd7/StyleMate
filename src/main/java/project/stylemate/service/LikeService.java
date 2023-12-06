@@ -68,4 +68,5 @@ public class LikeService {
 
         return likeRepository.findByMemberAndStyle(member, style).isPresent();
     }
+
 }
