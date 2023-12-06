@@ -22,7 +22,7 @@ public class BookMarkService {
     private final StyleRepository styleRepository;
 
     @Transactional
-    public boolean add(Long memberId, Long styleId) {
+    public void add(Long memberId, Long styleId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
 
@@ -31,14 +31,13 @@ public class BookMarkService {
 
         if (isNotAlreadyBookMark(member, style)) {
             bookMarkRepository.save(BookMark.builder()
-                                            .member(member)
-                                            .style(style)
-                                            .build()
+                    .member(member)
+                    .style(style)
+                    .build()
             );
-            return true;
+
         }
 
-        return false;
     }
 
     public boolean isNotAlreadyBookMark(Member member, Style style) {
@@ -51,5 +50,15 @@ public class BookMarkService {
                 .orElseThrow(() -> new SmLogicException(ReturnCode.BOOKMARK_NOT_FOUND));
 
         bookMarkRepository.delete(bookMark);
+    }
+
+    public boolean isBookMarkedByMember(Long memberId, Long styleId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.MEMBER_NOT_FOUND));
+
+        Style style = styleRepository.findById(styleId)
+                .orElseThrow(() -> new SmLogicException(ReturnCode.STYLE_NOT_FOUND));
+
+        return bookMarkRepository.findByMemberAndStyle(member, style).isPresent();
     }
 }

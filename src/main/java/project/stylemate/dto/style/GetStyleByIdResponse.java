@@ -23,9 +23,10 @@ public class GetStyleByIdResponse {
     private Long likeCount;
 
     private boolean liked = false;
+    private boolean bookmarked = false;
 
 
-    public static GetStyleByIdResponse of(Style style, Long likeCount, boolean liked) {
+    public static GetStyleByIdResponse of(Style style, Long likeCount, boolean liked, boolean bookmarked) {
         return GetStyleByIdResponse.builder()
                 .memberId(style.getMember().getId())
                 .nickname(style.getMember().getNickname())
@@ -39,6 +40,7 @@ public class GetStyleByIdResponse {
                 .styleRank(style.getStyleRank())
                 .likeCount(likeCount)
                 .liked(liked)
+                .bookmarked(bookmarked)
                 .build();
     }
 

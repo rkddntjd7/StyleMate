@@ -46,12 +46,12 @@ class BookMarkServiceTest {
         when(bookMarkRepository.findByMemberAndStyle(member, style)).thenReturn(Optional.empty());
 
         //when
-        boolean result = bookMarkService.add(memberId, styleID);
+        bookMarkService.add(memberId, styleID);
 
         //then
-        assertTrue(result);
         verify(memberRepository, times(1)).findById(memberId);
         verify(styleRepository, times(1)).findById(styleID);
+        verify(bookMarkRepository, times(1)).findByMemberAndStyle(member, style);
         verify(bookMarkRepository, times(1)).save(any(BookMark.class));
     }
 
@@ -69,12 +69,12 @@ class BookMarkServiceTest {
         when(bookMarkRepository.findByMemberAndStyle(member, style)).thenReturn(Optional.of(bookMark));
 
         //when
-        boolean result = bookMarkService.add(memberId, styleID);
+        bookMarkService.add(memberId, styleID);
 
         //then
-        assertFalse(result);
         verify(memberRepository, times(1)).findById(memberId);
         verify(styleRepository, times(1)).findById(styleID);
+        verify(bookMarkRepository, times(1)).findByMemberAndStyle(member, style);
         verify(bookMarkRepository, times(0)).save(any(BookMark.class));
     }
 
