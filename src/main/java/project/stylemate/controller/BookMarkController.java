@@ -23,6 +23,7 @@ public class BookMarkController {
     }
 
     @DeleteMapping("/api/v1/styles/{styleId}/bookmarks/{bookMarkId}")
+    //styleId는 사용하지 않는 변수지만 rest api 표준을 위해 명시
     public ApiResponse<?> delete(@PathVariable Long styleId,
                                  @PathVariable Long bookMarkId
     ) {

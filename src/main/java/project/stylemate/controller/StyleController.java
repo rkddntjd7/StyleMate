@@ -46,11 +46,11 @@ public class StyleController {
         Long memberId = 1L;
         Style style = styleService.getStyleById(styleId);
         Long likeCount = likeService.getLikeCountByStyleId(styleId);
-        boolean liked = likeService.isLikedByMember(memberId, styleId);
-        boolean bookmarked = bookMarkService.isBookMarkedByMember(memberId, styleId);
+        boolean isLiked = likeService.isLikedByMember(memberId, styleId);
+        boolean isBookmarked = bookMarkService.isBookMarkedByMember(memberId, styleId);
 
 
-        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount, liked, bookmarked));
+        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount, isLiked, isBookmarked));
     }
 
     //API 문서: https://www.notion.so/ac3f277d8db7401f936fee4f1d26b92d?pvs=4

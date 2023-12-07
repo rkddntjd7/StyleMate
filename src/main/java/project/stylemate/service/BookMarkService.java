@@ -40,7 +40,7 @@ public class BookMarkService {
 
     }
 
-    public boolean isNotAlreadyBookMark(Member member, Style style) {
+    private boolean isNotAlreadyBookMark(Member member, Style style) {
         return bookMarkRepository.findByMemberAndStyle(member, style).isEmpty();
     }
 
