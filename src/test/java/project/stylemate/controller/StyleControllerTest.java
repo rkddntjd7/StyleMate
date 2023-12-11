@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,9 +28,11 @@ import project.stylemate.dto.style.UpdateStyleRequest;
 import project.stylemate.entity.Member;
 import project.stylemate.entity.Style;
 import project.stylemate.enums.Gender;
+import project.stylemate.service.BookMarkService;
 import project.stylemate.service.LikeService;
 import project.stylemate.service.StyleService;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,6 +61,9 @@ class StyleControllerTest {
 
     @MockBean
     private LikeService likeService;
+
+    @MockBean
+    private BookMarkService bookMarkService;
 
     @Test
     public void 스타일전부조회() throws Exception {
