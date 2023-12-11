@@ -10,6 +10,7 @@ import project.stylemate.dto.common.SmPage;
 import project.stylemate.dto.params.UpsertStyleParam;
 import project.stylemate.entity.Style;
 import project.stylemate.enums.ReturnCode;
+import project.stylemate.service.BookMarkService;
 import project.stylemate.service.LikeService;
 import project.stylemate.service.StyleService;
 
@@ -23,6 +24,7 @@ public class StyleController {
 
     private final StyleService styleService;
     private final LikeService likeService;
+    private final BookMarkService bookMarkService;
 
     //API 문서: https://www.notion.so/d6b383b3ef7a4426b1ec5a95f61563f9?pvs=4
     @GetMapping("/api/v1/styles")
@@ -44,9 +46,11 @@ public class StyleController {
         Long memberId = 1L;
         Style style = styleService.getStyleById(styleId);
         Long likeCount = likeService.getLikeCountByStyleId(styleId);
-        boolean liked = likeService.isLikedByMember(memberId, styleId);
+        boolean isLiked = likeService.isLikedByMember(memberId, styleId);
+        boolean isBookmarked = bookMarkService.isBookMarkedByMember(memberId, styleId);
 
-        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount, liked));
+
+        return ApiResponse.of(GetStyleByIdResponse.of(style, likeCount, isLiked, isBookmarked));
     }
 
     //API 문서: https://www.notion.so/ac3f277d8db7401f936fee4f1d26b92d?pvs=4

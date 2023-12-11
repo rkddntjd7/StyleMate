@@ -17,6 +17,9 @@ public enum ReturnCode {
 
     //4400 - Like 클라이언트 에러
     //4500 - Like 서버 에러
+
+    //5400 - Bookmark 클라이언트 에러
+    //5500 - Bookmark 서버 에러
     SUCCESS("0000", "요청에 성공하였습니다."),
 
     WRONG_PARAMETER("1000", "잘못된 파라미터입니다."),
@@ -40,7 +43,9 @@ public enum ReturnCode {
     COMMENT_NOT_FOUND("3501", "해당 댓글을 찾을 수 없습니다."),
     COMMENT_NOT_IN_STYLE("3502","해당 댓글이 지정된 스타일에서 찾을 수 없습니다."),
 
-    LIKE_NOT_FOUND("4501", "해당 좋아요를 찾을 수 없습니다.");
+    LIKE_NOT_FOUND("4501", "해당 좋아요를 찾을 수 없습니다."),
+
+    BOOKMARK_NOT_FOUND("5501", "해당 북마크를 찾을 수 없습니다.");
 
 
     private final String returnCode;
