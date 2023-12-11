@@ -37,7 +37,7 @@ class LikeControllerTest {
         Long styleId = 1L;
 
         //when
-        ResultActions perform = mockMvc.perform(post("/api/v1/styles/{styleId}/favorites", styleId));
+        ResultActions perform = mockMvc.perform(post("/api/v1/styles/{styleId}/likes", styleId));
 
         //then
         perform.andExpect(status().isOk())
@@ -54,7 +54,7 @@ class LikeControllerTest {
         Long likeId = 1L;
 
         //when
-        ResultActions perform = mockMvc.perform(delete("/api/v1/styles/{styleId}/{likeId}", styleId, likeId));
+        ResultActions perform = mockMvc.perform(delete("/api/v1/styles/{styleId}/likes/{likeId}", styleId, likeId));
 
         //then
         perform.andExpect(status().isOk())
