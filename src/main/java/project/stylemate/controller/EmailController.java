@@ -35,10 +35,8 @@ public class EmailController {
     //API 문서: https://www.notion.so/064df8f270fb4598a5c6ec316a7bf7e8?pvs=4
     @PostMapping("/api/v1/users/verify")
     ApiResponse<?> verifyEmail(@RequestBody VerificationRequest request) {
-        if (verificationService.verifyEmail(request.getEmail(), request.getVerificationCode())) {
-            return ApiResponse.of(ReturnCode.SUCCESS);
-        } else {
-            throw new SmRequestException(ReturnCode.VERIFICATIONCODE_NOT_VALID);
-        }
+        verificationService.verifyEmail(request.getEmail(), request.getVerificationCode());
+
+        return ApiResponse.of(ReturnCode.SUCCESS);
     }
 }
