@@ -21,11 +21,8 @@ public class UserVerificationController {
     //API 문서: https://www.notion.so/fa161a63750e4df3b545db23c848d24e?pvs=4
     @PostMapping("/api/v1/users/send-verification-code")
     ApiResponse<?> sendVerificationCode(@RequestBody SendVerificationCodeRequest request) {
-        String verificationCode = verificationService.generateVerificationCode();
 
-        emailService.sendEmail(request.getEmail(), "이메일 인증", "인증 번호: " + verificationCode);
-
-        verificationService.saveVerificationCode(request.getEmail(), verificationCode);
+        verificationService.saveVerificationCode(request.getEmail());
 
         return ApiResponse.of(ReturnCode.SUCCESS);
     }
@@ -33,6 +30,7 @@ public class UserVerificationController {
     //API 문서: https://www.notion.so/064df8f270fb4598a5c6ec316a7bf7e8?pvs=4
     @PostMapping("/api/v1/users/verify")
     ApiResponse<?> verifyVerificationCode(@RequestBody VerifyVerificationCodeRequest request) {
+
         verificationService.verifyEmail(request.getEmail(), request.getVerificationCode());
 
         return ApiResponse.of(ReturnCode.SUCCESS);

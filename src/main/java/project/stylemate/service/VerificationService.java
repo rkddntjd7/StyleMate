@@ -18,13 +18,19 @@ import java.util.concurrent.TimeUnit;
 public class VerificationService {
 
     private final RedisTemplate<String, String> redisTemplate;
+    private final EmailService emailService;
 
-    public String generateVerificationCode() {
+    private String generateVerificationCode() {
         return String.valueOf((int) (Math.random() * 9000) + 1000);
     }
 
-    public void saveVerificationCode(String email, String verificationCode) {
+    public void saveVerificationCode(String email) {
         String key = RedisKeyConstants.VERIFICATION_CODE_KEY_PREFIX + email;
+
+        String verificationCode = generateVerificationCode();
+
+        emailService.sendEmail(email, "이메일 인증", "인증 번호: " + verificationCode);
+
         redisTemplate.opsForValue().set(key, verificationCode, 5, TimeUnit.MINUTES);
     }
 
