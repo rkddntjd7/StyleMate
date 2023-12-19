@@ -8,6 +8,7 @@ import project.stylemate.constants.RedisKeyConstants;
 import project.stylemate.enums.ReturnCode;
 import project.stylemate.exception.SmRequestException;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +26,7 @@ public class VerificationService {
     }
 
     public void saveVerificationCode(String email) {
-        String key = RedisKeyConstants.VERIFICATION_CODE_KEY_PREFIX + email;
+        String key = MessageFormat.format(RedisKeyConstants.VERIFICATION_CODE_KEY_PREFIX, email);
 
         String verificationCode = generateVerificationCode();
 
@@ -35,7 +36,7 @@ public class VerificationService {
     }
 
     public void verifyEmail(String email, String verificationCode) {
-        String key = RedisKeyConstants.VERIFICATION_CODE_KEY_PREFIX + email;
+        String key = MessageFormat.format(RedisKeyConstants.VERIFICATION_CODE_KEY_PREFIX, email);
         String savedCode = redisTemplate.opsForValue().get(key);
 
         if (StringUtils.equals(savedCode, verificationCode)) {
