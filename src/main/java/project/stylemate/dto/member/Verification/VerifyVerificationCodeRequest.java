@@ -1,11 +1,11 @@
-package project.stylemate.dto.member.email;
+package project.stylemate.dto.member.Verification;
 
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
-public class VerificationRequest {
+public class VerifyVerificationCodeRequest {
 
     @NotNull
     private String email;
