@@ -1,12 +1,16 @@
 package project.stylemate.service;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import project.stylemate.enums.ReturnCode;
 import project.stylemate.exception.SmRequestException;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +33,7 @@ public class VerificationService {
         String key = VERIFICATION_CODE_KEY_PREFIX + email;
         String savedCode = redisTemplate.opsForValue().get(key);
 
-        if (savedCode != null && savedCode.equals(verificationCode)) {
+        if (StringUtils.equals(savedCode, verificationCode)) {
             redisTemplate.delete(key);
         } else {
             throw new SmRequestException(ReturnCode.VERIFICATIONCODE_NOT_VALID);
