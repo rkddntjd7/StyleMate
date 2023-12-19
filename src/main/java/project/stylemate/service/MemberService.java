@@ -15,7 +15,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public void checkUsernameDuplication(String username) {
-        if (memberRepository.existsByUsername(username) == true) {
+        if (memberRepository.findByUsername(username) != null) {
             throw new SmLogicException(ReturnCode.USERNAME_ALREADY_EXISTS);
         }
     }
